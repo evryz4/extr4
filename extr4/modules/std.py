@@ -8,7 +8,7 @@ class StdMod(loader.Module):
 
     strings = loader.strings(
         name='StdModule',
-        version='1.0'
+        version='1.1'
     )
 
     @loader.command('info')
@@ -54,7 +54,7 @@ class StdMod(loader.Module):
         cfg = config.get()
 
         if utils.is_args(msg):
-            hmodule = utils.argslist(msg)[0]
+            hmodule = utils.args(msg)
             for i in modules[0]:
                 if hmodule.lower() == i.lower():
                     hmodule = i
