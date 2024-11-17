@@ -6,10 +6,9 @@ from pyrogram import Client
 
 configfile = 'config.json'
 
-print('You can get your api id and hash at the https://my.telegram.org/')
-
 custom = input('Custom api id and api hash (Y/n): ')
 if custom.lower() == 'y':
+    print('You can get your api id and hash at the https://my.telegram.org/')
     api_id = input('Enter your api id: ')
     api_hash = input('Enter your api hash: ')
 else:
