@@ -2,11 +2,9 @@ from pyrogram import Client
 from pyrogram.types import Message
 from pyrogram import filters
 
-import loader
+import loader, utils
 
-modules = loader.get_modules()
-
-config = loader.Config()
+config = utils.Config()
 
 VERSION = '1.0'
 
@@ -22,6 +20,8 @@ app = Client(name=client_name, api_id=api_id, api_hash=api_hash, phone_number=ph
 
 @app.on_message(filters.me)
 async def main(client: Client, msg: Message):
+    modules = loader.get_modules()
+
     if msg.text[0] == prefix:
         cmd = ''.join(msg.text.split()[0][1:])
         for i in modules[1]:
