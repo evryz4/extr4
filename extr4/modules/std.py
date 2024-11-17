@@ -48,7 +48,6 @@ class StdMod(loader.Module):
         '''- показывает все модули (название модуля для получения информации о нем)'''
 
         modules = loader.get_modules()
-        print(modules)
 
         config = utils.Config()
         cfg = config.get()
