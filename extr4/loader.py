@@ -30,7 +30,10 @@ def command(name):
 def get_modules() -> tuple:
     '''Returns tuple (modules[name:class], commands[module:[name:command]]'''
 
-    modulespath = os.path.join(os.path.dirname(__file__), 'modules')
+    if os.path.dirname(__file__)[-7:] == 'modules':
+        modulespath = os.path.dirname(__file__)
+    else:
+        modulespath = os.path.join(os.path.dirname(__file__), 'modules')
 
     modules = []
     for mod in os.listdir(modulespath):
