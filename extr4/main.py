@@ -5,10 +5,11 @@ from pyrogram import filters
 import loader, utils
 
 config = utils.Config()
-
-VERSION = '1.0'
-
 cfg = config.get()
+
+if not cfg["configured"]:
+    print('Run setup.py first!')
+    exit()
 
 client_name = cfg['client_name']
 api_id = cfg['api_id']
@@ -26,7 +27,10 @@ async def main(client: Client, msg: Message):
         cmd = ''.join(msg.text.split()[0][1:])
         for i in modules[1]:
             if cmd in modules[1][i]:
-                await modules[1][i][cmd](client, msg)
+                try:
+                    await modules[1][i][cmd](client, msg)
+                except Exception as err:
+                    await msg.edit(f'❌ Произошла ошибка:\n\n{err}')
     else:
         return
 
