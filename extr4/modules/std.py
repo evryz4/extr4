@@ -15,13 +15,13 @@ class StdMod(loader.Module):
     async def infocmd(client: Client, msg: Message):
         '''- показывает информацию о юзерботе'''
 
-        config = loader.Config()
+        config = utils.Config()
         cfg = config.get()
         if not 'infotext' in cfg:
             config.edit(infotext=standarttext)
         text = cfg['infotext']
 
-        text = text.replace('[owner]', f'@{msg.from_user.username}')\
+        text = text.replace('[owner]', f'{(await client.get_me()).username and '@'+(await client.get_me()).username or (await client.get_me()).id}')\
                    .replace('[version]', cfg['version'])\
                    .replace('[prefix]', cfg['prefix'])\
                    .replace('\\', '\n')
@@ -31,7 +31,7 @@ class StdMod(loader.Module):
     async def infotextcmd(client: Client, msg: Message):
         '''[текст] - изменяет текст команды info. Можно использовать [owner], [version], [prefix], \\ для пробела. Напишите standart для стандартного текста'''
 
-        config = loader.Config()
+        config = utils.Config()
 
         if utils.is_args(msg):
             if utils.argslist(msg)[0] == 'standart':
@@ -48,8 +48,9 @@ class StdMod(loader.Module):
         '''- показывает все модули (название модуля для получения информации о нем)'''
 
         modules = loader.get_modules()
+        print(modules)
 
-        config = loader.Config()
+        config = utils.Config()
         cfg = config.get()
 
         if utils.is_args(msg):
