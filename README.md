@@ -7,7 +7,7 @@ P.S. Much things are taken from [hikka](https://github.com/hikariatama/Hikka)
 ## Installation
 1. Install the requirements:
 
-```pip install requirements.txt```
+```pip install -r requirements.txt```
 
 2. Run the setup.py file:
 
