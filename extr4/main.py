@@ -2,7 +2,9 @@ from pyrogram import Client
 from pyrogram.types import Message
 from pyrogram import filters
 
-import loader, utils
+from pyrogram.handlers import MessageHandler
+
+import loader, utils.utils as utils
 
 config = utils.Config()
 cfg = config.get()
@@ -17,13 +19,17 @@ api_hash = cfg['api_hash']
 phone_number = cfg['phone_number']
 prefix = cfg['prefix']
 
+modules = loader.get_modules()
+
 app = Client(name=client_name, api_id=api_id, api_hash=api_hash, phone_number=phone_number)
 
-@app.on_message(filters.me)
-async def main(client: Client, msg: Message):
-    modules = loader.get_modules()
+groups = {
+    MessageHandler: 1
+}
 
+async def on_command(client: Client, msg: Message):
     if msg.text[0] == prefix:
+        modules = loader.get_modules()
         cmd = ''.join(msg.text.split()[0][1:])
         for i in modules[1]:
             if cmd in modules[1][i]:
@@ -34,4 +40,16 @@ async def main(client: Client, msg: Message):
     else:
         return
 
+app.add_handler(MessageHandler(callback=on_command, filters=filters.me and filters.text))
+
+for module in modules[2]:
+    for event in modules[2][module]:
+        if event in groups:
+            groups[event] += 1
+        else:
+            groups[event] = 1
+
+        app.add_handler(event(modules[2][module][event], filters=modules[2][module][event].filter), group=groups[event])
+
+print('Бот запущен!')
 app.run()

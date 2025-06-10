@@ -1,4 +1,4 @@
-import loader, utils
+import loader, utils.utils as utils, utils.argutils as argutils
 from bottypes import *
 
 class Loader(loader.Module):
@@ -14,10 +14,27 @@ class Loader(loader.Module):
         '''[ответ на файл] - загрузить модуль из файла'''
 
         old_modules = loader.get_modules()[0]
-        await msg.reply_to_message.download('modules/')
-        new_modules = loader.get_modules()[0]
-        for module in new_modules:
+        path = await msg.reply_to_message.download('modules/')
+        modules = loader.get_modules()
+        for module in modules[0]:
             if module not in old_modules:
-                await msg.edit(f'✅ Модуль {module} успешно загружен!')
+                config = utils.Config()
+                cfg = config.get()
+
+                text = f'Модуль **{module}** ({modules[0][module].strings['version']}) успешно загружен! Измените сообщение чтобы просмотреть код.\n'
+                text += f'__{modules[0][module].__doc__}__\n\n'
+                for command in modules[1][module]:
+                    text += f'`{cfg['prefix']}{command}` {modules[1][module][command].__doc__}\n'
+                await msg.edit(text)
                 return
-        await msg.edit(f'✅ Модуль успешно обновлен!')
+            with open(path, encoding='utf-8') as f:
+                if module in f.read():
+                    await msg.edit(f'✅ Модуль {module} успешно обновлен! Измените сообщение чтобы просмотреть код.')
+            
+            args = argutils.Args(client, msg)
+            await args.handle()
+
+            @args.after()
+            async def _(client: Client, msg: Message, fargs):
+                with open(path, encoding='utf-8') as file:
+                    await msg.edit(f'```python\n{file.read()}```')

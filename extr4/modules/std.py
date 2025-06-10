@@ -1,4 +1,4 @@
-import loader, utils
+import loader, utils.utils as utils, utils.argutils as argutils
 from bottypes import *
 
 standarttext = '\ud83c\udf83 extr4\\\ud83d\udc7e owner - [owner]\\\\\ud83d\udd22 version - [version]\\\u2328 prefix - [prefix]'
@@ -33,12 +33,12 @@ class StdMod(loader.Module):
 
         config = utils.Config()
 
-        if utils.is_args(msg):
-            if utils.argslist(msg)[0] == 'standart':
+        if argutils.is_args(msg):
+            if argutils.argslist(msg)[0] == 'standart':
                 config.edit(infotext=standarttext)
                 await msg.edit_text(f'✅ Текст успешно изменен на стандартный!')
             else:
-                config.edit(infotext=utils.args(msg))
+                config.edit(infotext=argutils.args(msg))
                 await msg.edit_text(f'✅ Текст успешно изменен!')
         else:
             await msg.edit_text(f'❌ Синтаксис команды: {config.get()['prefix']}infotext [текст]')
@@ -52,8 +52,8 @@ class StdMod(loader.Module):
         config = utils.Config()
         cfg = config.get()
 
-        if utils.is_args(msg):
-            hmodule = utils.args(msg)
+        if argutils.is_args(msg):
+            hmodule = argutils.args(msg)
             for i in modules[0]:
                 if hmodule.lower() == i.lower():
                     hmodule = i
@@ -72,3 +72,9 @@ class StdMod(loader.Module):
                 text += f'`{module}` - __{modules[0][module].__doc__}__ ( {' | '.join(modules[1][module].keys())} )\n'
 
         await msg.edit_text(text)
+    
+    @loader.command('stop')
+    async def stopcmd(client: Client, msg: Message):
+        '''выключить бота'''
+        
+        await client.stop()
