@@ -1,3 +1,5 @@
+import logging
+
 from pyrogram import Client
 from pyrogram.types import Message
 from pyrogram import filters
@@ -44,12 +46,13 @@ app.add_handler(MessageHandler(callback=on_command, filters=filters.me and filte
 
 for module in modules[2]:
     for event in modules[2][module]:
-        if event in groups:
-            groups[event] += 1
-        else:
-            groups[event] = 1
+        for method in modules[2][module][event]:
+            if event in groups:
+                groups[event] += 1
+            else:
+                groups[event] = 1
 
-        app.add_handler(event(modules[2][module][event], filters=modules[2][module][event].filter), group=groups[event])
+            app.add_handler(event(method, filters=method.filter), group=groups[event])
 
 print('Бот запущен!')
 app.run()
