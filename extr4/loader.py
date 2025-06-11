@@ -84,7 +84,10 @@ def get_modules() -> tuple:
                     
                     if getattr(method, 'is_handler', False):
                         event = method.event
-                        handlers[module_name][event] = method
+                        if event in handlers[module_name]:
+                            handlers[module_name][event].append(method)
+                        else:
+                            handlers[module_name][event] = [method]
     
     return (cmodules, commands, handlers)
 
