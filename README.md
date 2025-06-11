@@ -22,7 +22,7 @@ In the 2.0 update of Extr4, I added the `@handler()` decorator in `loader.py`.
 
 I\`d call it the next generation of the `@command()` decorator - previously, modules could only handle user command like `.info`, but now their capabilities are *unlimited*. They can handle any type of callback.
 
-## Installation
+## Setup
 1. Install the requirements:
 
 ```pip install -r requirements.txt```
@@ -38,3 +38,7 @@ I\`d call it the next generation of the `@command()` decorator - previously, mod
       
 
     ```python3 setup.py```
+
+
+## Authors
+Author: evryz4, Modified by qialel
