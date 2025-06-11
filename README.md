@@ -41,4 +41,4 @@ I\`d call it the next generation of the `@command()` decorator - previously, mod
 
 
 ## Authors
-Author: evryz4, Modified by qialel
+Author: evryz4, Modified by qiaelel 
