@@ -1,5 +1,5 @@
 # extr4
-## What is this
+## About
 extr4 - userbot for telegram. The userbot ~~supports~~ works because of modules.
 
 P.S. More ideas was taken from [hikka](https://github.com/hikariatama/Hikka)
