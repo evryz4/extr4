@@ -1,6 +1,6 @@
-# extr4
+# extr4 2.0 (mod by qialel)
 ## About
-extr4 - userbot for telegram. The userbot ~~supports~~ works because of modules.
+extr4 - userbot for telegram. The userbot works because of modules.
 
 P.S. More ideas was taken from [hikka](https://github.com/hikariatama/Hikka)
 
@@ -22,6 +22,9 @@ In the 2.0 update of Extr4, I added the `@handler()` decorator in `loader.py`.
 
 I\`d call it the next generation of the `@command()` decorator - previously, modules could only handle user command like `.info`, but now their capabilities are *unlimited*. They can handle any type of callback.
 
+### Modules
+For this Userbot, you can write modules yourself or use ready-made modules in the `/modules` folder.
+
 ## Setup
 1. Install the requirements:
 
@@ -39,6 +42,10 @@ I\`d call it the next generation of the `@command()` decorator - previously, mod
 
     ```python3 setup.py```
 
+3. Follow the instructions in the terminal.
+
+## How it works?
+This Usbot works with the Pyrogram library  ...
 
 ## Authors
 Author: evryz4,
