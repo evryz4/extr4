@@ -1,8 +1,8 @@
-# extr4 2.0 (mod by qialel)
+# extr4 2.0 (mod by qiaelel)
 ## About
 extr4 - userbot for telegram. The userbot works because of modules.
 
-P.S. More ideas was taken from [hikka](https://github.com/hikariatama/Hikka)
+More ideas was taken from [hikka](https://github.com/hikariatama/Hikka)
 
 ## Features
 ### Utils
