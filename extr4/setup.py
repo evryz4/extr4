@@ -1,18 +1,26 @@
 import json
 import os
 import shutil
+import time
 
 import asyncio
 
 from pyrogram import Client
 from pyrogram.errors import SessionPasswordNeeded
+from pyrogram.errors import BadRequest
+
+prefix = ' '
+error = False
 
 if not os.path.exists("config.json"):
     shutil.copy("config.example.json", "config.json")
 
 configfile = 'config.json'
 
-custom = input('Custom api id and api hash (Y/n): ')
+ #by qiaelel
+print("Setup extr4. v1.1")
+
+custom = input('Use custom api id and api hash? (Y/N): ')
 if custom.lower() == 'y':
     print('You can get your api id and hash at the https://my.telegram.org/')
     api_id = input('Enter your api id: ')
@@ -47,8 +55,35 @@ async def login():
     except SessionPasswordNeeded:
         password = input('Enter the 2FA password: ')
         await app.check_password(password)
+    except BadRequest:
+        print("Something went wrong. Please restart setup.py and try again.")
+        time.sleep(2)
+        exit()
+
+
+while prefix == ' ':
+    inprefix = input("enter prefix: ")
+
+    if (inprefix == "." or inprefix == "," or inprefix == "/"):
+        config['prefix'] = prefix
+        prefix = inprefix
+        print("prefix changed to", prefix)
+    else:
+        print("invalid prefix. Avaliable prefix are: '.', ',', '/'")
+        print("Please try again")
+
+
+
 
 asyncio.run(login())
 
-os.system('python3 main.py')
+
+start = input("Do you want start extr4 now? (Y/N)")
+if start == 'y':
+    os.system('python3 main.py')
+    print("If nothing happends, run the main file.py independently")
+    exit()
+else:
+    exit()
+
 exit()
