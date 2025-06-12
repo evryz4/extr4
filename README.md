@@ -2,7 +2,7 @@
 ## What is this
 extr4 - userbot for telegram. The userbot ~~supports~~ works because of modules.
 
-P.S. Much things are taken from [hikka](https://github.com/hikariatama/Hikka)
+P.S. More ideas was taken from [hikka](https://github.com/hikariatama/Hikka)
 
 ## Features
 ### Utils
@@ -34,11 +34,12 @@ I\`d call it the next generation of the `@command()` decorator - previously, mod
 
     ```python setup.py```
 
-  - Linux:
+  - Linux:  
       
 
     ```python3 setup.py```
 
 
 ## Authors
-Author: evryz4, Modified by qiaelel 
+Author: evryz4
+*Modified by qialel*
